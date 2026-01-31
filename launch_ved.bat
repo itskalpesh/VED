@@ -2,15 +2,22 @@
 title VED SYSTEM LAUNCHER
 cd /d %~dp0
 
-:: 1. Define Python Interpreter Path
+:: 1. Define Python Interpreter Path (prefer venv, fallback to system python)
 set PYTHON_EXE=venv\Scripts\python.exe
-
-:: 2. Check Environment
 if not exist "%PYTHON_EXE%" (
-    echo [ERROR] Virtual environment not found.
-    echo Please delete the 'venv' folder and restart.
-    pause
-    exit /b
+    set PYTHON_EXE=python
+    echo [INFO] Using system Python. Create a venv for isolation: python -m venv venv
+) else (
+    "%PYTHON_EXE%" -c "exit 0" 2>nul
+    if errorlevel 1 (
+        set PYTHON_EXE=python
+        echo [INFO] Venv points to missing Python. Using system Python. Delete 'venv' folder to remove this message.
+    ) else (
+        echo [INFO] Activating venv...
+        call venv\Scripts\activate.bat
+        set PYTHON_EXE=python
+        echo [INFO] Using venv.
+    )
 )
 
 echo ======================================
