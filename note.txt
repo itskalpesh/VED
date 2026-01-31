@@ -1,0 +1,58 @@
+VED AI — Setup Requirements & Notes
+==================================
+
+1. REQUIRED SOFTWARE (INSTALL FIRST)
+
+A) Python (MANDATORY)
+--------------------
+• Version: Python 3.12 or newer
+• Download from: https://www.python.org/downloads/
+• During install:
+  ✔ Check “Add Python to PATH”
+  ✔ Select “Install for all users” (recommended)
+
+Verify after install:
+> python --version
+Should show 3.12+
+
+B) Windows
+----------
+• Windows 10 or 11 (64-bit)
+• Tested on Windows 11
+
+2. HOW TO RUN VED
+----------------
+1. Download or clone this repository
+2. Open the folder
+3. Double-click: launch_ved.bat
+4. Choose:
+   [1] CLI Mode
+   [2] GUI Mode (Jarvis UI)
+
+VED will:
+• Create virtual environment
+• Install dependencies automatically
+• Fix broken setup if needed
+• Start VED
+
+3. IMPORTANT NOTES
+------------------
+• First run may take several minutes (dependency install)
+• Internet required on first run
+• Offline mode works after setup
+• Do NOT delete launch_ved.bat
+• Do NOT move folders
+
+4. TROUBLESHOOTING
+------------------
+If something breaks:
+• Delete the 'venv' folder
+• Run launch_ved.bat again
+
+5. SAFETY
+---------
+• VED can open apps and files
+• Shutdown / restart requires confirmation
+• No destructive actions run silently
+
+VED is designed to be safe, explainable, and modular.

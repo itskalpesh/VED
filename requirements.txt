@@ -1,8 +1,0 @@
-customtkinter
-google-genai
-llama-cpp-python
-pyttsx3
-speechrecognition
-platformdirs
-requests
-openai

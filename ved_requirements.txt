@@ -1,0 +1,28 @@
+# =========================
+# VED Core Dependencies
+# =========================
+
+# Offline LLM
+llama-cpp-python
+
+# Online LLM
+openai
+google-genai
+
+# Utilities
+requests
+platformdirs
+
+# =========================
+# GUI
+# =========================
+customtkinter
+pillow
+
+# =========================
+# Voice (future / optional)
+# =========================
+pyttsx3
+speechrecognition
+sounddevice
+numpy

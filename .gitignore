@@ -4,3 +4,7 @@ __pycache__/
 .env
 VED_DATA/
 store.json
+# OS control build
+os_control/build/
+*.pyd
+*.so
