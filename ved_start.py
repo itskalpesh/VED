@@ -1,46 +1,80 @@
 """
-VED — single entry point (Tier-4 upgrade).
-Usage: python ved_start.py [cli|gui]
-Default: CLI. Use 'gui' for Jarvis UI.
+VED — Single Unified Entry Point
+- Asks user: CLI / GUI / Exit
+- After exit, returns to menu
+- Works for Python run, BAT, EXE
 """
 
 import sys
 import warnings
+
 warnings.filterwarnings("ignore")
 
-def main():
-    mode = (sys.argv[1] if len(sys.argv) > 1 else "cli").lower()
 
-    if mode == "gui":
-        try:
-            # GUI runs on import (app.mainloop() in jarvis_ui.py)
-            import ui.jarvis_ui  # noqa: F401
-        except Exception as e:
-            print("GUI not available:", e)
-            sys.exit(1)
-        return
-
-    # CLI
+def run_cli():
     from kernel.ved import VED
+
     ved = VED()
-    print("VED CLI MODE")
-    print("Type 'exit' to quit.\n")
+    print("\nVED CLI MODE")
+    print("Type 'exit' to return to menu.\n")
+
     while True:
         try:
             user_input = input("You: ").strip()
             if not user_input:
                 continue
+
             if user_input.lower() in ("exit", "quit"):
-                print("VED: Shutting down.")
+                print("VED: Returning to menu...\n")
                 break
+
             response = ved.process(user_input)
             print(f"VED: {response}")
+
         except KeyboardInterrupt:
-            print("\nVED: Interrupted. Exiting.")
+            print("\nVED: Interrupted. Returning to menu...\n")
             break
+
         except Exception as e:
             print(f"VED ERROR: {e}")
 
 
+def run_gui():
+    try:
+        print("\nStarting VED GUI (Jarvis Mode)...")
+        import ui.jarvis_ui  # GUI blocks here (mainloop inside)
+        print("\nVED GUI closed. Returning to menu...\n")
+    except Exception as e:
+        print("\nGUI failed to start:")
+        print(e)
+        print("Returning to menu...\n")
+
+
+def main_menu():
+    while True:
+        print("======================================")
+        print("          VED AI SYSTEM")
+        print("======================================")
+        print("[1] CLI (Terminal Mode)")
+        print("[2] GUI (Jarvis UI Mode)")
+        print("[0] Exit")
+        print()
+
+        choice = input("Select option (1/2/0): ").strip()
+
+        if choice == "1":
+            run_cli()
+
+        elif choice == "2":
+            run_gui()
+
+        elif choice == "0":
+            print("\nVED: Shutting down. Goodbye 👋")
+            sys.exit(0)
+
+        else:
+            print("\nInvalid option. Try again.\n")
+
+
 if __name__ == "__main__":
-    main()
+    main_menu()
